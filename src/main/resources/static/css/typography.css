@@ -1,0 +1,49 @@
+h1 {
+    font-size: calc(2em * var(--text-multiplier, 1));
+    font-weight: bold;
+}
+
+h2 {
+    font-size: calc(1.85em * var(--text-multiplier, 1));
+    font-weight: bold;
+}
+
+h3 {
+    font-size: calc(1.7em * var(--text-multiplier, 1));
+    font-weight: bold;
+}
+
+h4 {
+    font-size: calc(1.55em * var(--text-multiplier, 1));
+    font-weight: bold;
+}
+
+h5 {
+    font-size: calc(1.4em * var(--text-multiplier, 1));
+    font-weight: bold;
+}
+
+h6 {
+    font-size: calc(1.25em * var(--text-multiplier, 1));
+    font-weight: bold;
+}
+
+p {
+    font-size: calc(1em * var(--text-multiplier, 1));
+}
+
+small {
+    font-size: calc(0.75em * var(--text-multiplier, 1));
+}
+
+p.subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    opacity: .87;
+}
+
+@media (min-width: 48rem) {
+    :root {
+        --text-multiplier: 1.25;
+    }
+}

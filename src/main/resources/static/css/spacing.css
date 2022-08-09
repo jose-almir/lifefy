@@ -1,0 +1,32 @@
+:root {
+    --spacing: calc(8px + 1.5625vw);
+}
+
+
+.ps {
+    padding: var(--spacing);
+}
+
+.py {
+    padding: var(--spacing) 0;
+}
+
+.px {
+    padding: 0 var(--spacing);
+}
+
+.ms {
+    margin: var(--spacing);
+}
+
+.my {
+    margin: var(--spacing) 0;
+}
+
+.mx {
+    margin: 0 var(--spacing);
+}
+
+.sb-btn {
+    margin: 0 2px;
+}

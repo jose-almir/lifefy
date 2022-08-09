@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lifefy - Seu perfil</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+</head>
+<body>
+<main class="ms">
+    <img alt="User profile picture" class="avatar-user" th:src="${user.images[0].url}">
+    <h1 th:text="${user.displayName}"></h1>
+    <img alt="User country" height="24" th:src="|https://countryflagsapi.com/png/${user.country}|"/>
+    <p class="subtitle" th:text="|${user.followers.total} seguidor(es)|"></p>
+    <span class="badge" th:text="${user.product}"></span>
+    <!--        <form id="birthdate-form" class="form-wrapper">-->
+    <!--            <div>-->
+    <!--                <input id="birthdate" name="birthdate" placeholder="Sua data de nascimento" required-->
+    <!--                       type="date" th:value="${birthdate}"/>-->
+    <!--            </div>-->
+    <!--            <button class="button sb-btn">Ir</button>-->
+    <!--        </form>-->
+    <hr/>
+    <div class="my">
+        <h4>Mais ouvidos ultimamente</h4>
+        <div class="artists">
+            <div th:each="artist:${top_artists}" class="artist-card">
+                <img th:src="${artist.images[0].url}" alt="">
+                <p th:text="${artist.name}" class="subtitle"></p>
+            </div>
+        </div>
+    </div>
+    <div class="my">
+        <h4 class="accordion">Não saem da sua cabeça <span class="down"><img src="/img/angle-down.svg"></span>
+            <span class="up"><img src="/img/angle-up.svg"></span>
+        </h4>
+        <div class="tracks panel">
+            <div th:each="track:${top_tracks}" class="track">
+                <img th:src="${track.album.images[0].url}"/>
+                <div>
+                    <p th:text="${track.name}" th:title="${track.getDuration()}"></p>
+                    <small th:text="${track.getAllArtists()}"></small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my">
+        <h4 class="accordion">Recomendo para você <span class="down"><img src="/img/angle-down.svg"></span> <span
+                class="up"><img src="/img/angle-up.svg"></span>
+        </h4>
+        <div class="tracks panel">
+            <form action="/playlist" method="post">
+                <input type="hidden" th:value="${recommendations_uris}" name="uris"/>
+                <button class="button my">Criar playlist</button>
+            </form>
+            <div th:each="track:${recommendations}" class="track">
+                <img th:src="${track.album.images[0].url}"/>
+                <div>
+                    <p th:text="${track.name}" th:title="${track.getDuration()}"></p>
+                    <small th:text="${track.getAllArtists()}"></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--<script>-->
+<!--    (() => {-->
+<!--        const birthdate = document.getElementById("birthdate");-->
+<!--        const [max,] = new Date().toISOString().split("T");-->
+<!--        birthdate.max = max;-->
+<!--    })();-->
+<!--</script>-->
+<script>
+    (() => {
+        const url_string = window.location.href;
+        const url = new URL(url_string);
+        const paramValue = url.searchParams.get("created");
+        if (paramValue) {
+            window.open(paramValue, "_blank");
+            window.history.pushState({}, document.title, window.location.pathname);
+        }
+
+        const accordions = document.getElementsByClassName("accordion");
+        for (const accordion of accordions) {
+            accordion.addEventListener("click", function () {
+                this.classList.toggle("active")
+                const panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    })()
+</script>
+</body>
+</html>
